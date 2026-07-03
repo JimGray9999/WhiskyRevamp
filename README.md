@@ -42,6 +42,13 @@ Translated on [Crowdin](https://crowdin.com/project/whisky).
 Whisky is on homebrew! Install with 
 `brew install --cask whisky`.
 
+## Local Build
+
+- Clone the repo somewhere on your Mac: `git clone https://github.com/JimGray9999/WhiskyRevamp.git /path/to/WhiskyRevamp`.
+- Open `/path/to/WhiskyRevamp/Whisky.xcodeproj` with Xcode running on an Apple Silicon machine with macOS 14.0 or newer.
+- Choose the `Whisky` scheme and a suitable Apple Silicon target (for example “My Mac (Designed for iPad)”).
+- Build (⌘B) and Run (⌘R) to launch the app. Use Product → Archive when you need a distributable `.app` bundle.
+
 ## My game isn't working!
 
 Some games need special steps to get working. Check out the [wiki](https://github.com/IsaacMarovitz/Whisky/wiki/Game-Support).

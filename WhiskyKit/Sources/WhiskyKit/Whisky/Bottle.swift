@@ -30,7 +30,7 @@ public final class Bottle: ObservableObject, Equatable, Hashable, Identifiable, 
     }
     @Published public var programs: [Program] = []
     @Published public var inFlight: Bool = false
-    public var isAvailable: Bool = false
+    @Published public var isAvailable: Bool = false
 
     /// All pins with their associated programs
     public var pinnedPrograms: [(pin: PinnedProgram, program: Program, // swiftlint:disable:this large_tuple

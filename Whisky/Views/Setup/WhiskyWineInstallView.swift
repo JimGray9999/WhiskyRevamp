@@ -21,6 +21,7 @@ import WhiskyKit
 
 struct WhiskyWineInstallView: View {
     @State var installing: Bool = true
+    @State var installFailed = false
     @Binding var tarLocation: URL
     @Binding var path: [SetupStage]
     @Binding var showSetup: Bool
@@ -39,6 +40,20 @@ struct WhiskyWineInstallView: View {
                     ProgressView()
                         .progressViewStyle(.circular)
                         .frame(width: 80)
+                } else if installFailed {
+                    VStack(spacing: 12) {
+                        Image(systemName: "xmark.circle")
+                            .resizable()
+                            .frame(width: 80, height: 80)
+                            .foregroundStyle(.red)
+                        Text("Installation failed. The downloaded archive may be corrupt.")
+                            .font(.subheadline)
+                            .multilineTextAlignment(.center)
+                            .foregroundStyle(.secondary)
+                        Button("Try Again") {
+                            path.removeLast(2)
+                        }
+                    }
                 } else {
                     Image(systemName: "checkmark.circle")
                         .resizable()
@@ -52,12 +67,15 @@ struct WhiskyWineInstallView: View {
         .frame(width: 400, height: 200)
         .onAppear {
             Task.detached {
-                await WhiskyWineInstaller.install(from: tarLocation)
+                let installed = await WhiskyWineInstaller.install(from: tarLocation)
                 await MainActor.run {
                     installing = false
+                    installFailed = !installed
                 }
-                sleep(2)
-                await proceed()
+                if installed {
+                    sleep(2)
+                    await proceed()
+                }
             }
         }
     }
