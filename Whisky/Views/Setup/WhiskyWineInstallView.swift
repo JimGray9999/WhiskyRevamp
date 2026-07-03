@@ -73,7 +73,7 @@ struct WhiskyWineInstallView: View {
                     installFailed = !installed
                 }
                 if installed {
-                    sleep(2)
+                    try? await Task.sleep(nanoseconds: 2_000_000_000)
                     await proceed()
                 }
             }
