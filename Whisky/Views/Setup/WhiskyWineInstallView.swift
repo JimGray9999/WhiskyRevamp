@@ -67,7 +67,7 @@ struct WhiskyWineInstallView: View {
         .frame(width: 400, height: 200)
         .onAppear {
             Task.detached {
-                let installed = await WhiskyWineInstaller.install(from: tarLocation)
+                let installed = WhiskyWineInstaller.install(from: tarLocation)
                 await MainActor.run {
                     installing = false
                     installFailed = !installed
